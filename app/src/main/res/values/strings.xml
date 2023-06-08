@@ -1,0 +1,33 @@
+<resources>
+    <string name="app_name">AquamanPro</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string-array name="strokes_array">
+        <item>Free</item>
+        <item>Backstroke</item>
+        <item>Breaststroke</item>
+        <item>Butterfly</item>
+    </string-array>
+
+    <string-array name="colors_array">
+        <item>Red</item>
+        <item>Yellow</item>
+        <item>Green</item>
+    </string-array>
+
+    <array name="initial_slider_values">
+        <item>0.0</item>
+        <item>5000.0</item>
+    </array>
+    <string name="create_workout_warmup">Save Warmup</string>
+    <string name="create_workout_main">Save Main</string>
+    <string name="create_workout_create">Save Workout</string>
+    <string name="create_workout_warmup_title">step 1: warmup</string>
+    <string name="create_workout_main_title">step 2: main</string>
+    <string name="create_workout_warmdown_title">step 3: cool down</string>
+
+    <string name="valid_input">Please enter valid input</string>
+    <string name="valid_user">The email or password is incorrect</string>
+    <string name="user_exist">User Exist</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+</resources>

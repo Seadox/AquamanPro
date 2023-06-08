@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "507719665849",
+    "firebase_url": "https://aquman-a9f09-default-rtdb.europe-west1.firebasedatabase.app",
+    "project_id": "aquman-a9f09",
+    "storage_bucket": "aquman-a9f09.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:507719665849:android:54704c4bd48e5abcb8b368",
+        "android_client_info": {
+          "package_name": "com.seadox.aquamanpro"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "507719665849-cnten62a7nhdul329q49ruecjqiaoo6b.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD0An6xAXSz6auj2B7uDPrPHzayx4TXJKQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "507719665849-cnten62a7nhdul329q49ruecjqiaoo6b.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
