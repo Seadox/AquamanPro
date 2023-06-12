@@ -107,8 +107,8 @@ public class DrillList implements Parcelable {
         String time = "";
 
         for (Drill drill : getWarmup()) {
-            distance += Integer.parseInt(drill.getDistance());
-            laps += Integer.parseInt(drill.getRounds());
+            distance = Integer.parseInt(drill.getDistance());
+            laps = Integer.parseInt(drill.getRounds());
 
             int min = 0, sec = 0;
             min = Integer.parseInt(drill.getTime().split(":")[0]);
@@ -120,22 +120,24 @@ public class DrillList implements Parcelable {
             }
 
             this.time = min + ":" + sec;
+            this.distance += laps * distance;
         }
 
         for (Drill drill : getMain()) {
-            distance += Integer.parseInt(drill.getDistance());
-            laps += Integer.parseInt(drill.getRounds());
+            distance = Integer.parseInt(drill.getDistance());
+            laps = Integer.parseInt(drill.getRounds());
 
             this.time = calcTime(drill);
+            this.distance += laps * distance;
         }
 
         for (Drill drill : getWarmdown()) {
-            distance += Integer.parseInt(drill.getDistance());
-            laps += Integer.parseInt(drill.getRounds());
+            distance = Integer.parseInt(drill.getDistance());
+            laps = Integer.parseInt(drill.getRounds());
             time = calcTime(drill);
+            this.distance += laps * distance;
         }
-        this.calories = (int) (laps * distance * CALORIES);
-        this.distance = laps * distance;
+        this.calories = (int) (CALORIES * this.distance);
         this.time = time;
     }
 

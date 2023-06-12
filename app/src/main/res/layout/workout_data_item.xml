@@ -68,7 +68,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
-        android:layout_alignTop="@id/workout_data_item_SIV_color"
+
         android:text="2:00"
         android:textSize="18sp"
         android:textStyle="bold"
@@ -79,7 +79,9 @@
         android:id="@+id/workout_data_item_SIV_timer"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginHorizontal="2dp"
         android:layout_toStartOf="@id/workout_data_item_MTV_time"
+        android:layout_alignTop="@+id/workout_data_item_MTV_time"
         android:src="@drawable/timer"
         app:shapeAppearanceOverlay="@style/circleImageView" />
 
@@ -87,7 +89,8 @@
         android:id="@+id/workout_data_item_SIV_fins"
         android:layout_width="30dp"
         android:layout_height="30dp"
-        android:layout_toStartOf="@id/workout_data_item_SIV_timer"
+        android:layout_alignParentEnd="true"
+        android:layout_below="@id/workout_data_item_SIV_color"
         android:src="@drawable/fins"
         android:layout_marginEnd="1dp"
         app:shapeAppearanceOverlay="@style/circleImageView" />
@@ -97,6 +100,7 @@
         android:layout_width="30dp"
         android:layout_height="30dp"
         android:layout_toStartOf="@id/workout_data_item_SIV_fins"
+        android:layout_alignTop="@+id/workout_data_item_SIV_fins"
         android:src="@drawable/pull_buoy"
         android:layout_marginEnd="1dp"
         app:shapeAppearanceOverlay="@style/circleImageView" />
@@ -106,6 +110,7 @@
         android:layout_width="30dp"
         android:layout_height="30dp"
         android:layout_toStartOf="@id/workout_data_item_SIV_pullBuoy"
+        android:layout_alignTop="@+id/workout_data_item_SIV_fins"
         android:src="@drawable/paddles"
         android:layout_marginEnd="1dp"
         app:shapeAppearanceOverlay="@style/circleImageView" />
@@ -115,6 +120,7 @@
         android:layout_width="30dp"
         android:layout_height="30dp"
         android:layout_toStartOf="@id/workout_data_item_SIV_paddles"
+        android:layout_alignTop="@+id/workout_data_item_SIV_fins"
         android:src="@drawable/kikboard"
         android:layout_marginEnd="1dp"
         app:shapeAppearanceOverlay="@style/circleImageView" />

@@ -1,6 +1,15 @@
 package com.seadox.aquamanpro.Fragments;
 
+import static android.Manifest.permission.READ_EXTERNAL_STORAGE;
+import static android.Manifest.permission.WRITE_EXTERNAL_STORAGE;
+
+import android.app.Activity;
+import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.os.Build;
 import android.os.Bundle;
+import android.os.Environment;
+import android.provider.Settings;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,6 +17,7 @@ import android.widget.LinearLayout;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
@@ -16,11 +26,12 @@ import com.google.android.material.textview.MaterialTextView;
 import com.seadox.aquamanpro.Models.Drill;
 import com.seadox.aquamanpro.Models.DrillList;
 import com.seadox.aquamanpro.R;
+import com.seadox.aquamanpro.Utilities.PDF_Generator;
 import com.seadox.aquamanpro.databinding.FragmentWorkoutBinding;
 
 public class WorkoutFragment extends Fragment {
+    private static final int PERMISSION_REQUEST_CODE = 200;
     private FragmentWorkoutBinding binding;
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -37,9 +48,20 @@ public class WorkoutFragment extends Fragment {
         if (getArguments() != null) {
             WorkoutFragmentArgs args = WorkoutFragmentArgs.fromBundle(getArguments());
             DrillList list = args.getWorkout();
-
             addWorkout(list);
+
+            binding.workoutSIVPdf.setOnClickListener(v -> savePDF(list));
         }
+
+    }
+
+    private void savePDF(DrillList list) {
+        PDF_Generator pdf = new PDF_Generator(binding.getRoot().getContext(), list);
+        if (!checkPermission()) {
+            requestPermission();
+            askForPermissions();
+        }
+        pdf.generatePDF();
     }
 
     @Override
@@ -118,5 +140,27 @@ public class WorkoutFragment extends Fragment {
         workout_data_item_SIV_kikboard.setVisibility(drill.isKikboard() ? View.VISIBLE : View.INVISIBLE);
 
         layout.addView(view);
+    }
+
+    private boolean checkPermission() {
+        // checking of permissions.
+        int permission1 = ContextCompat.checkSelfPermission(binding.getRoot().getContext(), WRITE_EXTERNAL_STORAGE);
+        int permission2 = ContextCompat.checkSelfPermission(binding.getRoot().getContext(), READ_EXTERNAL_STORAGE);
+        return permission1 == PackageManager.PERMISSION_GRANTED && permission2 == PackageManager.PERMISSION_GRANTED;
+    }
+
+    private void requestPermission() {
+        // requesting permissions if not provided.
+        ActivityCompat.requestPermissions((Activity) binding.getRoot().getContext(), new String[]{WRITE_EXTERNAL_STORAGE, READ_EXTERNAL_STORAGE}, PERMISSION_REQUEST_CODE);
+    }
+
+    public void askForPermissions() {
+        if (Build.VERSION.SDK_INT >= 30) {
+            if (!Environment.isExternalStorageManager()) {
+                Intent getpermission = new Intent();
+                getpermission.setAction(Settings.ACTION_MANAGE_ALL_FILES_ACCESS_PERMISSION);
+                startActivity(getpermission);
+            }
+        }
     }
 }

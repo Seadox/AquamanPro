@@ -18,8 +18,8 @@
         <item>0.0</item>
         <item>5000.0</item>
     </array>
-    <string name="create_workout_warmup">Save Warmup</string>
-    <string name="create_workout_main">Save Main</string>
+    <string name="create_workout_warmup">Go To Main</string>
+    <string name="create_workout_main">Go To Cool Down</string>
     <string name="create_workout_create">Save Workout</string>
     <string name="create_workout_warmup_title">step 1: warmup</string>
     <string name="create_workout_main_title">step 2: main</string>

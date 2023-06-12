@@ -12,8 +12,8 @@ import androidx.fragment.app.Fragment;
 import com.google.android.material.button.MaterialButton;
 import com.seadox.aquamanpro.Interface.MainActivityCallBacks;
 import com.seadox.aquamanpro.R;
+import com.seadox.aquamanpro.Utilities.SignUtilities;
 import com.seadox.aquamanpro.Utilities.SignalGenerator;
-import com.seadox.aquamanpro.Utilities.signUtilities;
 
 public class signUpFragment extends Fragment {
     private AppCompatEditText signUp_ET_name;
@@ -50,7 +50,7 @@ public class signUpFragment extends Fragment {
             String email = signUp_ET_username.getText().toString();
             String password = signUp_ET_password.getText().toString();
             String name = signUp_ET_name.getText().toString();
-            if (signUtilities.isEmailValid(email) && signUtilities.isPasswordValid(password) && signUtilities.isNameValid(name))
+            if (SignUtilities.isEmailValid(email) && SignUtilities.isPasswordValid(password) && SignUtilities.isNameValid(name))
                 mainActivityCallBacks.signUp(email, password, name);
             else {
                 resetUI();
