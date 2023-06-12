@@ -27,6 +27,8 @@ tailored workouts to meet your specific needs.
 5. Create a workout and share it with others.
 6. Save workouts and share with friends.
 
+[Demo Video](./demo.mp4)
+
 ## Authors
 
 - [@Seadox](https://www.github.com/seadox)

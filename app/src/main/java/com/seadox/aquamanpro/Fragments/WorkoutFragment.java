@@ -4,12 +4,8 @@ import static android.Manifest.permission.READ_EXTERNAL_STORAGE;
 import static android.Manifest.permission.WRITE_EXTERNAL_STORAGE;
 
 import android.app.Activity;
-import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.os.Build;
 import android.os.Bundle;
-import android.os.Environment;
-import android.provider.Settings;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -59,7 +55,6 @@ public class WorkoutFragment extends Fragment {
         PDF_Generator pdf = new PDF_Generator(binding.getRoot().getContext(), list);
         if (!checkPermission()) {
             requestPermission();
-            askForPermissions();
         }
         pdf.generatePDF();
     }
@@ -152,15 +147,5 @@ public class WorkoutFragment extends Fragment {
     private void requestPermission() {
         // requesting permissions if not provided.
         ActivityCompat.requestPermissions((Activity) binding.getRoot().getContext(), new String[]{WRITE_EXTERNAL_STORAGE, READ_EXTERNAL_STORAGE}, PERMISSION_REQUEST_CODE);
-    }
-
-    public void askForPermissions() {
-        if (Build.VERSION.SDK_INT >= 30) {
-            if (!Environment.isExternalStorageManager()) {
-                Intent getpermission = new Intent();
-                getpermission.setAction(Settings.ACTION_MANAGE_ALL_FILES_ACCESS_PERMISSION);
-                startActivity(getpermission);
-            }
-        }
     }
 }
