@@ -19,7 +19,16 @@ public class Drill {
     }
 
     public Drill setTime(String time) {
-        this.time = time;
+        int min = Integer.parseInt(time.split(":")[0]);
+        int sec = Integer.parseInt(time.split(":")[1]);
+
+        if (sec / 60 > 0) {
+            int additionalMinutes = sec / 60;
+            min += additionalMinutes;
+            sec %= 60;
+        }
+
+        this.time = (min < 10 ? "0" : "") + min + ":" + (sec < 10 ? "0" : "") + sec;
         return this;
     }
 

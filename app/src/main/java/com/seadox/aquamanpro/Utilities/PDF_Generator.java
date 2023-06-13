@@ -22,8 +22,9 @@ import java.nio.file.Files;
 
 public class PDF_Generator {
     private final String FILE_FORMAT = ".pdf";
-    private final String DIRACTION = "AquamanPro Workouts";
+    private final String DIRACTION = "/Download";
     private final String SAVE_SUCCESS = "PDF file generated successfully";
+    private final String FILE_NAME = "AquamanPro_";
     private DrillList drillList;
     private Context context;
     private PdfDocument pdfDocument;
@@ -91,7 +92,7 @@ public class PDF_Generator {
 
         pdfDocument.finishPage(page);
 
-        saveFile("AquamanPro_" + System.currentTimeMillis());
+        saveFile(FILE_NAME + System.currentTimeMillis());
 
         pdfDocument.close();
     }
@@ -144,10 +145,7 @@ public class PDF_Generator {
     }
 
     private void saveFile(String fileName) {
-        File dir = new File(Environment.getExternalStorageDirectory(), "/Download");
-//
-//        if (!dir.exists())
-//            dir.mkdir();
+        File dir = new File(Environment.getExternalStorageDirectory(), DIRACTION);
 
         File file = new File(dir, fileName + FILE_FORMAT);
 

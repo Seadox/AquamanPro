@@ -26,6 +26,9 @@ public class Utils {
         public static boolean checkTime(String time) {
             String regex = "^\\d{2}+:\\d{2}+$";//Format 00:00
 
+            if (Integer.parseInt(time.split(":")[0]) > 60 || Integer.parseInt(time.split(":")[1]) > 60)// max 60minutes and 60 seconds
+                return false;
+
             return time.matches(regex);
         }
 

@@ -5,6 +5,7 @@ import android.os.Parcelable;
 
 import androidx.annotation.NonNull;
 
+import java.time.LocalTime;
 import java.util.ArrayList;
 
 public class DrillList implements Parcelable {
@@ -104,22 +105,13 @@ public class DrillList implements Parcelable {
 
     public void calcData() {
         int distance = 0, laps = 0;
-        String time = "";
+        this.time = "00:00:00";
 
         for (Drill drill : getWarmup()) {
             distance = Integer.parseInt(drill.getDistance());
             laps = Integer.parseInt(drill.getRounds());
 
-            int min = 0, sec = 0;
-            min = Integer.parseInt(drill.getTime().split(":")[0]);
-            sec = Integer.parseInt(drill.getTime().split(":")[1]);
-
-            if (sec % 60 > 0) {
-                min++;
-                sec = sec % 60;
-            }
-
-            this.time = min + ":" + sec;
+            this.time = calcTime(drill);
             this.distance += laps * distance;
         }
 
@@ -134,30 +126,42 @@ public class DrillList implements Parcelable {
         for (Drill drill : getWarmdown()) {
             distance = Integer.parseInt(drill.getDistance());
             laps = Integer.parseInt(drill.getRounds());
-            time = calcTime(drill);
+
+            this.time = calcTime(drill);
             this.distance += laps * distance;
         }
         this.calories = (int) (CALORIES * this.distance);
-        this.time = time;
     }
 
     private String calcTime(Drill drill) {
-        int min = 0, sec = 0, prevMin = 0, prevSec = 0;
+        int hour = 0, min = 0, sec = 0, prevHour = 0, prevMin = 0, prevSec = 0, laps = 0;
         min = Integer.parseInt(drill.getTime().split(":")[0]);
         sec = Integer.parseInt(drill.getTime().split(":")[1]);
 
-        prevMin = Integer.parseInt(time.split(":")[0]);
-        prevSec = Integer.parseInt(time.split(":")[1]);
+        prevHour = Integer.parseInt(time.split(":")[0]);
+        prevMin = Integer.parseInt(time.split(":")[1]);
+        prevSec = Integer.parseInt(time.split(":")[2]);
 
-        min += prevMin;
-        sec += prevSec;
+        LocalTime prevTime = LocalTime.of(prevHour, prevMin, prevSec);
 
         if (sec / 60 > 0) {
-            min += (sec / 60) - 1;
-            sec = sec % 60;
+            int additionalMinutes = sec / 60;
+            min += additionalMinutes;
+            sec %= 60;
         }
 
-        return min + ":" + sec;
+        if (min / 60 > 0) {
+            int additionalHours = min / 60;
+            hour += additionalHours;
+            min %= 60;
+        }
+
+        laps = Integer.parseInt(drill.getRounds());
+
+        LocalTime time = LocalTime.of(hour, min, sec);
+        LocalTime sumTime = LocalTime.ofSecondOfDay(((long) laps * time.toSecondOfDay()) + prevTime.toSecondOfDay());
+
+        return (sumTime.getHour() == 0 ? "00" : sumTime.getHour()) + ":" + (sumTime.getMinute() < 10 ? "0" : "") + sumTime.getMinute() + ":" + (sumTime.getSecond() < 10 ? "0" : "") + sumTime.getSecond();
     }
 
     @Override
