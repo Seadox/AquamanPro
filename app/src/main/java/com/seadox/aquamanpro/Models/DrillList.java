@@ -103,7 +103,7 @@ public class DrillList implements Parcelable {
         return this;
     }
 
-    public void calcData() {
+    public boolean calcData() {
         int distance = 0, laps = 0;
         this.time = "00:00:00";
 
@@ -111,15 +111,16 @@ public class DrillList implements Parcelable {
             distance = Integer.parseInt(drill.getDistance());
             laps = Integer.parseInt(drill.getRounds());
 
-            this.time = calcTime(drill);
+            if (this.time != null)
+                this.time = calcTime(drill);
             this.distance += laps * distance;
         }
 
         for (Drill drill : getMain()) {
             distance = Integer.parseInt(drill.getDistance());
             laps = Integer.parseInt(drill.getRounds());
-
-            this.time = calcTime(drill);
+            if (this.time != null)
+                this.time = calcTime(drill);
             this.distance += laps * distance;
         }
 
@@ -127,10 +128,13 @@ public class DrillList implements Parcelable {
             distance = Integer.parseInt(drill.getDistance());
             laps = Integer.parseInt(drill.getRounds());
 
-            this.time = calcTime(drill);
+            if (this.time != null)
+                this.time = calcTime(drill);
             this.distance += laps * distance;
         }
         this.calories = (int) (CALORIES * this.distance);
+
+        return this.time != null;
     }
 
     private String calcTime(Drill drill) {
@@ -159,7 +163,15 @@ public class DrillList implements Parcelable {
         laps = Integer.parseInt(drill.getRounds());
 
         LocalTime time = LocalTime.of(hour, min, sec);
-        LocalTime sumTime = LocalTime.ofSecondOfDay(((long) laps * time.toSecondOfDay()) + prevTime.toSecondOfDay());
+
+        long secOfDay = ((long) laps * time.toSecondOfDay()) + prevTime.toSecondOfDay();
+
+        LocalTime sumTime;
+
+        if (secOfDay <= LocalTime.MAX.toSecondOfDay())
+            sumTime = LocalTime.ofSecondOfDay(secOfDay);
+        else
+            return null;
 
         return (sumTime.getHour() == 0 ? "00" : sumTime.getHour()) + ":" + (sumTime.getMinute() < 10 ? "0" : "") + sumTime.getMinute() + ":" + (sumTime.getSecond() < 10 ? "0" : "") + sumTime.getSecond();
     }

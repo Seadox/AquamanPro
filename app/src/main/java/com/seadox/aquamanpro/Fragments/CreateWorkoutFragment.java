@@ -98,11 +98,13 @@ public class CreateWorkoutFragment extends Fragment {
     }
 
     private void addWorkoutToDB() {
-        drillList.calcData();
+        boolean isCreated = drillList.calcData();
 
-        DBManager.addWorkout(drillList);
-
-        showWorkout(drillList);
+        if (isCreated) {
+            DBManager.addWorkout(drillList);
+            showWorkout(drillList);
+        } else
+            SignalGenerator.getInstance().toast(ErrorsMsg.CreateWorkout.WORKOUT_ERROR, Toast.LENGTH_SHORT);
     }
 
     private boolean createSet(ArrayList<Drill> drills) {
@@ -159,7 +161,7 @@ public class CreateWorkoutFragment extends Fragment {
     }
 
     private void showWorkout(DrillList list) {
-       CreateWorkoutFragmentDirections.ActionCreateWorkoutFragmentToWorkoutFragment
+        CreateWorkoutFragmentDirections.ActionCreateWorkoutFragmentToWorkoutFragment
                 action = CreateWorkoutFragmentDirections.actionCreateWorkoutFragmentToWorkoutFragment(list);
         navController.navigate(action);
     }
