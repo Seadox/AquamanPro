@@ -29,6 +29,14 @@ tailored workouts to meet your specific needs.
 
 [Demo Video](./demo.mp4)
 
+# Libraries Used
+
+The following libraries were used in this project:
+
+- [Glide](https://github.com/bumptech/glide) - An image loading and caching library focused on smooth scrolling
+- [Firebase](https://github.com/firebase/quickstart-android) - Provides backend services, real-time databases, authentication, hosting, and more.
+- [Material Components](https://github.com/material-components/material-components-android) - Modular and customizable Material Design UI components.
+
 ## Authors
 
 - [@Seadox](https://www.github.com/seadox)

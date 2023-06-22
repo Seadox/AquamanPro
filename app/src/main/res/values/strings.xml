@@ -21,9 +21,9 @@
     <string name="create_workout_warmup">Go To Main</string>
     <string name="create_workout_main">Go To Cool Down</string>
     <string name="create_workout_create">Save Workout</string>
-    <string name="create_workout_warmup_title">step 1: warmup</string>
-    <string name="create_workout_main_title">step 2: main</string>
-    <string name="create_workout_warmdown_title">step 3: cool down</string>
+    <string name="create_workout_warmup_title">step 1/3: warmup</string>
+    <string name="create_workout_main_title">step 2/3: main</string>
+    <string name="create_workout_warmdown_title">step 3/3: cool down</string>
 
     <string name="valid_input">Please enter valid input</string>
     <string name="valid_user">The email or password is incorrect</string>
